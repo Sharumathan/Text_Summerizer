@@ -1,0 +1,107 @@
+An approach to retrieval in a search that is likely (but not precisely) to produce the top K scoring documents is called:
+
+ a. Exact top K document retrieval
+ b. top scoring document retrieval
+ c. Inexact top K document retrieval  
+ d. Imprecise top K document retrieval
+ (Ans c)
+
+An approach to computing scores in an IR system that pre-computes for each term in the dictionary, the set of documents with the highest weights for the term is:
+ a. Champion list
+ b. Impact ordering
+ c. Cluster pruning
+ d. Tiered indexes
+ (Ans A)
+
+An approach to computing scores in an IR system that orders documents in the posting list of a term by decreasing order of termfrequency is called:
+ a. Champion list
+ b. Impact ordering
+ c. Cluster pruning
+ d. Tiered indexes
+ (Ans b)
+
+An approach to computing scores in an IR system that selects a sample of documents randomly from the collection as leaders whichare in the index and links similar documents to it (followers) is called
+ a. Champion list
+ b. Impact ordering
+ c. Cluster pruning
+ d. Tiered indexes
+ (Ans c)
+
+Considering only documents containing terms whose idf exceeds a preset threshold is an index elimination.
+(True)
+
+A scoring function that computes an aggregate of a document's relevance from multiple sources is called evidence accumulation.
+(True)
+
+The posting list should be sorted by: DocID
+
+Term-document incidence matrix is:Sparse
+
+"sparse" because it typically contains a large number of zeros. In this matrix, the rows represent terms and the columns represent documents, with each entry indicating the presence or absence of a term in a document. Since most documents only contain a small subset of all possible terms, the matrix is sparse, meaning that the majority of its entries are zeros. This sparsity allows for efficient storage and processing of the matrix, making it a commonly used representation in information retrieval and text mining tasks.
+The term-document incidence matrix is described as "sparse" because it typically contains a large number of zeros. In this matrix, the rows represent terms and the columns represent documents, with each entry indicating the presence or absence of a term in a document. Since most documents only contain a small subset of all possible terms, the matrix is sparse, meaning that the majority of its entries are zeros. This sparsity allows for efficient storage and processing of th
+
+
+
+data structure that maps terms back to the parts of a document in which they occur is called an
+
+	Inverted Index
+
+A process to efficiently intersect lists to be able to quickly find documents that contain both terms is referred to as merging postings lists.
+	True
+
+The model of information retrieval in which we can pose any query in the form of a Boolean expression is called the Boolean retrieval model.
+	True
+
+
+An advantage of a positional index is that it reduces the asymptotic complexity of a postings intersection operation.
+	False
+
+
+An index that includes sequences of words or terms of variable length that have been extracted from a source document is called a:
+	Phrase Index
+
+One disadvantage, as outlined in our text, of using a permuterm index for wild card queries is:
+	The required rotations creates a very large dictionary
+
+
+Which of the following is a technique for context sensitive spelling correction:
+	Soundex algorithms
+
+For a very large collection of books of classic literature the most appropriate indexing algorithm would be:
+
+	Distributed Map-Reduce indexing algorithm
+
+For a large collection of documents such as the internet that experience frequent change the most appropriate indexing algorithm would be:
+	
+	Dynamic indexing process employing an auxiliary index
+
+
+
+Given two strings s1 and s2, the edit distance between them is sometimes known as the:
+	Levenshtein distance
+
+For a moderately large collection of static documents maintained on a single system the most appropriate indexing algorithm would be:
+	Single-pass in memory indexing algorithm
+
+For a small collection of documents on a personal computer that don't experience any change the most appropriate indexing algorithm would be:
+	Block sort-based indexing algorithm
+
+Hashing is a process where an item is reduced, through a mathematical process, to an integer.
+	True
+
+The size of the document collection that can be indexed by single-pass in-memory indexing algorithm is limited by the size of the disk storage the computer running the indexer process has access to.
+	True
+
+The formula used to estimate the vocabulary size of a collection is known as:
+	Heap's law
+
+
+
+
+
+
+
+
+
+
+
