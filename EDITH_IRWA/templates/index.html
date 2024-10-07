@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+     <div class="body">
+          <div class="header">
+               <div class="left_header">
+                    <img src="{{ url_for('static', filename='img4.png') }}" class="logo" alt="">
+                    <span>DITH</span>
+               </div>
+               <div class="middle_header">
+                    <span>Sentence prioritizer</span>
+                    <span>Text summerizer</span>
+                    <span>Sentiment Analyzer</span>
+               </div>
+               <div class="right_header">
+                    Prefect AI Tool Powerd by EDITH
+               </div>
+          </div>
+          <div class="content">
+               <div class="advertise">
+                    <span class="title" id="hider">Free Text Summarizer and Simplifier AI Tool</span>
+                    
+                    <span class="summery_heading">SUMMERY</span>
+                        <span id="spacy_summary" class="span_gray">Simplify your text content with Summarizer AI, the free AI tool designed for quick, accurate text summaries. Type your content, click "Summarize", and enjoy your summarized text content within a few seconds.</span>
+                    <br>
+                    <span class="summery_heading">Important Gatherings</span>
+                    <span id="t5_summary" class="span_gray">Pull the top rated key sentences from a paragraph..</span>
+                    <br>
+                    <span class="summery_heading">Sentiment Analyse</span>
+                    <span id="sentiment" class="span_gray" >Sentiment analysis detects emotions in text, classifying them as positive, neutral, or negative.</span>
+                    <br>
+                    <span class="summery_heading">Topics</span>
+                    <span id="topics" class="span_gray" >Key topics from the provided text.</span>
+                    <br>
+                    <span class="summery_heading">Extracted Key Words</span>
+                    <span id="Extracted" class="span_gray" >Conduct topic extraction to elegantly reveal the central themes within the text.</span>
+               </div>
+               <div class="summerizer">
+                    <form action="" id="summarizeForm" class="form">
+                         <textarea id="text" class="input_space" placeholder="Enter your text here ...." name="sharuk" id=""></textarea>
+                         <div class="input_div"><input class="button" type="submit" value="summerize" id="summrize_button"></div>
+                    </form>
+
+               </div>
+
+          </div>
+     </div>
+
+     <script>
+
+            const textToHide = document.getElementById('hider');
+            const hideButton = document.getElementById('summrize_button');
+            
+            hideButton.addEventListener('click', () => {
+                textToHide.style.display = 'none'; // Hide the text when the button is clicked
+            });
+
+        const form = document.getElementById('summarizeForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const text = document.getElementById('text').value;
+    
+            const response = await fetch('/summarize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    text: text
+                })
+            });
+    
+            const data = await response.json();
+            document.getElementById('spacy_summary').textContent = data.spacy_summary;
+            document.getElementById('t5_summary').textContent = data.t5_summary;
+            document.getElementById('sentiment').textContent = `Label: ${data.sentiment.label}, Score: ${data.sentiment.score}`;
+            //document.getElementById('topics').textContent = data.topics
+
+            // Assuming data.topics is a string, not an object
+            //const topicText = data.topics.split("<br>").map(line => line.trim()).join("<br>");  // Splits by <br> and joins as formatted lines
+            const topicText = data.topics.split("<br>").map(line => line.trim()).join("<br><br>");
+            // Display the formatted topics
+            document.getElementById('topics').innerHTML = topicText;
+
+
+            // Display the formatted topics as two lines
+             // Adding two <br> tags for the empty line
+
+
+            
+            // Display extracted keywords one by one
+            const extractedContainer = document.getElementById('Extracted');
+            extractedContainer.innerHTML = '';  // Clear previous keywords
+            data.extracted_keywords.forEach(([keyword, score]) => {
+                const keywordElement = document.createElement('div');
+                keywordElement.textContent = `Keyword: ${keyword}, Score: ${score}`;
+                extractedContainer.appendChild(keywordElement);
+            });
+        });
+    </script>
+    
+
+</body>
+</html>

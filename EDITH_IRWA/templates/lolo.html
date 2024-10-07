@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer with Sentiment Analysis</title>
+</head>
+<body>
+    <h1>Text Summarizer with Sentiment Analysis</h1>
+    <form id="summarizeForm">
+        <label for="text">Enter Text to Summarize:</label><br>
+        <textarea id="text" name="text" rows="10" cols="50"></textarea><br>
+        <button type="submit">Summarize</button>
+    </form>
+    
+    <h2>Important Points :</h2>
+    <p id="spacy_summary"></p>
+    
+    <h2>MY OWN MODEL:</h2>
+    <p id="t5_summary"></p>
+    
+    <h2>Sentiment Analysis:</h2>
+    <p id="sentiment"></p>
+
+    <script>
+        const form = document.getElementById('summarizeForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const text = document.getElementById('text').value;
+            
+            const response = await fetch('/summarize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    text: text
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById('spacy_summary').textContent = data.spacy_summary;
+            document.getElementById('t5_summary').textContent = data.t5_summary;
+            document.getElementById('sentiment').textContent = `Label: ${data.sentiment.label}, Score: ${data.sentiment.score}`;
+        });
+    </script>
+</body>
+</html>
